@@ -6,7 +6,7 @@ package View;
 
 import java.util.Scanner;
 import Model.*;
-import static jdk.nashorn.tools.ShellFunctions.input;
+
 
 public class MainView extends View
 {
@@ -19,15 +19,16 @@ public class MainView extends View
     // The constructor - initializes the menu
     public MainView()
     {
-        menu = "\n 8 - Get saved Object"
+        menu = "\n"
              + "\n 1 - Create a Rectangle Object"
              + "\n 2 - Create a Circle Object"
              + "\n 3 - Create a Triangle Object"
              + "\n 4 - Display the Rectangle Object"
              + "\n 5 - Display the Circle Object"
              + "\n 6 - Display the Triangle Object"
-             + "\n 9 - Save Object"
-             + "\n 7 - Quit";
+             + "\n 7 - Quit"
+             + "\n 8 - Get saved Object"
+             + "\n 9 - Save Object";
     }
     
     // The displayMenu method
@@ -47,6 +48,7 @@ public class MainView extends View
         do
         {
             this.console.println("Enter an option (1-7): ");
+            // when trying to run program stops here and line 77 of FileIO
             inputValue = keyboard.nextInt();
             if(inputValue < 1 || inputValue > 7)
             {
@@ -64,9 +66,7 @@ public class MainView extends View
     {
         switch(option)
         {
-            case 8 : // get existing object
-                this.getExistingObject();
-                break;
+            
             case 1:
             // create a Rectangle object if one has not been created
                 if(myRectangle == null)
@@ -165,12 +165,17 @@ public class MainView extends View
                             "No triangle has been created yet.");
                 }
                 break;
-            case 9 : // save the current object
-                this.saveObject();
-                break;
+            
             case 7:        
             break; 
             
+            case 8 : // get existing object
+                this.getExistingObject();
+                break;
+                
+            case 9 : // save the current object
+                this.saveObject();
+                break;
         }
     }
 

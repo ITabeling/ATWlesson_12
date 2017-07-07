@@ -28,7 +28,8 @@ public class FileIO
     {
       try{
           //open character stream files for end user input and output
-          FileIO.inFile = new BufferedReader(new InputStreamReader(System.in));
+          FileIO.inFile = 
+                  new BufferedReader(new InputStreamReader(System.in));
           FileIO.outFile = new PrintWriter(System.out, true);
       
    
@@ -46,7 +47,7 @@ public class FileIO
                                    "\nCause:" + e.getCause() +
                                     "\nMessage:" + e.getMessage());
                
-               e.printStackTrace();;
+               e.printStackTrace();// removed double ; 
       }
         finally {
           try {
@@ -59,6 +60,8 @@ public class FileIO
               if (FileIO.logFile != null)
               FileIO.logFile.close();
           } catch (IOException ex) {
+              //this is what assignment tells us to write but is giving error
+              //ErrorView.display(this.getClass().getName(), "nError closing files");
               System.out.println("Error closing files");
         
               return;
@@ -70,6 +73,7 @@ public class FileIO
         do
         {
             mmv.displayMenu();
+            //when trying to run the program game stops here and line 52 of MainView
             option = mmv.getOption();
             if (option != 7)
             {
