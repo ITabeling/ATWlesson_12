@@ -49,7 +49,7 @@ public class MainView extends View
         do
         {
             this.console.println("Enter an option (1-7): ");
-            // when trying to run program stops here and line 77 of FileIO
+            // when trying to run program stops here and line 78 of FileIO
             inputValue = keyboard.nextInt();//Instructions says should be "inputValue = this.keyboard.readLine();
             // changed from (inputValue < 1 || inputValue > 7)
             if(inputValue < 1 || inputValue > 9)

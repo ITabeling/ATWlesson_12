@@ -74,7 +74,7 @@ public class FileIO
         do
         {
             mmv.displayMenu();
-            //when trying to run the program game stops here and line 52 of MainView
+            //when trying to run the program game stops here and line 53 of MainView
             option = mmv.getOption();
             if (option != 7)
             {
