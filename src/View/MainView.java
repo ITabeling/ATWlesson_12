@@ -8,6 +8,8 @@ import java.util.Scanner;
 import Model.*;
 import fileio.FileIO;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 
 
@@ -15,12 +17,13 @@ public class MainView
 {
     private String menu;
     //Assignment says to delete Scanner 
+    //commented out Scanner keyboard per instructions 
     //Scanner keyboard = new Scanner(System.in);
     Rectangle myRectangle = null;
     Circle myCircle = null;
     Triangle myTriangle = null;
     
-    //@SuppressWarnings("FieldNameHidesFieldInSuperclass")
+    
     BufferedReader keyboard = FileIO.getInFile();
     PrintWriter console = FileIO.getOutFile();
     // The constructor - initializes the menu
@@ -63,8 +66,8 @@ public class MainView
                 ErrorView.display(this.getClass().getName(),
                                     "Invalid selection.");
             }
-            
-        } while(inputValue < 1 || inputValue > 7);
+      // changed from (inputValue < 1 || inputValue > 7)  
+        } while(inputValue < 1 || inputValue > 9);
         return inputValue;
     }
     
@@ -195,16 +198,39 @@ public class MainView
         this.console.println("\n\nEnter the file pathe for file where the object"
                 + "is saved");
         // should go away after adding control code from assignment
-        String filePath = this.getInput();
+        //commented out (I think this is in wrong location??)
+        //String filePath = this.getInput();
     }
 
     private void saveObject() {
         
         this.console.println("\n\nEnter the file path for file where the object"
                                  +"is to be saved");
+        String filePath = this.getInput();
+        
+        try {
+            MainView.saveObject(FileIO.getExisitingObject(), filePath);
+        } catch (Exception ex) {
+            ErrorView.display("MainView", ex.getMessage());
+            
+        }
         /*why is there a second one of these
         String filePath = this.getInput();
         // Instructions say to implement the Control Layer function (we dont have one)
         */    
-}
+}        
+    /*commented out (this code is from page 27 has issue with lines
+    227 and 233 (MainViewException wants to create new class
+    
+                 // assignment has Game game (does not work???)
+    public static void saveGame(MainView game, String filepath)
+            throws MainViewException {
+        try( FileOutputStream fops = new FileOutputStream(filepath)) {
+            ObjectOutputStream output = new ObjectOutputStream(fops);
+            output.writeObject(game);
+        }
+        catch(Exception e){
+            throw new MainViewException(e.getMessage());
+        }
+    }*/
 }
