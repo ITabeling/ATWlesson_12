@@ -207,6 +207,6 @@ public class MainView extends View
                                  +"is to be saved");
         
         String filePath = this.getInput();
-        
+        // Instructions say to implement the Control Layer function (we dont have one)
     }
 }

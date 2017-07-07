@@ -76,11 +76,12 @@ public class FileIO
             mmv.displayMenu();
             //when trying to run the program game stops here and line 53 of MainView
             option = mmv.getOption();
-            if (option != 7)
+            // changed these numbers to 9
+            if (option != 9)
             {
                 mmv.doAction(option);
             }
-        } while (option != 7);
+        } while (option != 9);
         
     }
     public static PrintWriter getOutFile() {
