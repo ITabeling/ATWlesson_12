@@ -56,7 +56,7 @@ public class MainView
         {
             this.console.println("Enter an option (1-7): ");
             // when trying to run program stops here and line 78 of FileIO
-            inputValue = keyboard.readLine();//Instructions says should be "inputValue = this.keyboard.readLine();
+            inputValue = keyboard.readline();//Instructions says should be "inputValue = this.keyboard.readLine();
             // changed from (inputValue < 1 || inputValue > 7)
             if(inputValue < 1 || inputValue > 9)
             {
