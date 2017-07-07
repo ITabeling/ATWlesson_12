@@ -8,7 +8,9 @@ import java.util.Scanner;
 import Model.*;
 import fileio.FileIO;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 
@@ -193,13 +195,25 @@ public class MainView
 
     
 
-    
+    // this code is pulled from page 25 (startSavedGame())
     private void getExistingObject() {
         this.console.println("\n\nEnter the file pathe for file where the object"
                 + "is saved");
         // should go away after adding control code from assignment
         //commented out (I think this is in wrong location??)
-        //String filePath = this.getInput();
+        String filePath = this.getInput();
+        
+        try {
+            //get an existing object
+            MainView.getSavedObject(filePath);
+           
+        } catch (Exception ex) {
+            ErrorView.display("MainView", ex.getMessage());
+        }
+        
+        //display menu (I don't think we need this code or it needs modified)
+        MainView menu = new MainView();
+        menu.displayMenu();
     }
 
     private void saveObject() {
@@ -223,14 +237,30 @@ public class MainView
     227 and 233 (MainViewException wants to create new class
     
                  // assignment has Game game (does not work???)
-    public static void saveGame(MainView game, String filepath)
+    public static void saveGame(MainView object, String filepath)
             throws MainViewException {
         try( FileOutputStream fops = new FileOutputStream(filepath)) {
             ObjectOutputStream output = new ObjectOutputStream(fops);
-            output.writeObject(game);
+            output.writeObject(object);
         }
         catch(Exception e){
             throw new MainViewException(e.getMessage());
         }
     }*/
+     // this block has an issue with MainViewException (wants to create class)
+    // errors on lines 253 and 262
+    public static void getSavedObject(String filepath) {
+                    //throws MainViewException
+                            MainView object = null;
+        
+        try( FileInputStream fips = new FileInputStream(filepath)) {
+            ObjectInputStream input = new ObjectInputStream(fips);
+            
+            object = (MainView) input.readObject();
+        }
+        catch(Exception e) {
+            //throw new MainViewException(e.getMessage());
+        }
+    
+}
 }
