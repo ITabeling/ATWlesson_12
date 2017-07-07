@@ -11,6 +11,7 @@ import Model.*;
 public class MainView extends View
 {
     private String menu;
+    //Assignment says to delete Scanner 
     Scanner keyboard = new Scanner(System.in);
     Rectangle myRectangle = null;
     Circle myCircle = null;
@@ -41,7 +42,7 @@ public class MainView extends View
     // The getOption method
     // Gets the user's input and returns it
     // Will loop until there is a valid choice
-  
+  @Override
     public int getOption()
     {
         int inputValue = 0;
@@ -49,8 +50,9 @@ public class MainView extends View
         {
             this.console.println("Enter an option (1-7): ");
             // when trying to run program stops here and line 77 of FileIO
-            inputValue = keyboard.nextInt();
-            if(inputValue < 1 || inputValue > 7)
+            inputValue = keyboard.nextInt();//Instructions says should be "inputValue = this.keyboard.readLine();
+            // changed from (inputValue < 1 || inputValue > 7)
+            if(inputValue < 1 || inputValue > 9)
             {
                 ErrorView.display(this.getClass().getName(),
                                     "Invalid selection.");
@@ -62,6 +64,8 @@ public class MainView extends View
     
     // The doAction method
     // executes the code for the selected action
+    // ????????????takes int but calls for double???????????
+    @Override
     public void doAction(int option)
     {
         switch(option)
@@ -79,7 +83,7 @@ public class MainView extends View
                     
                     myRectangle = new Rectangle( );
                     myRectangle.setWidth(wide);
-                    myRectangle.setLength(len);
+                    myRectangle.setLength(len);//??len or length????
                 }
                 else
                 {
@@ -189,11 +193,7 @@ public class MainView extends View
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public boolean doAction(String value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     private void getExistingObject() {
         this.console.println("\n\nEnter the file pathe for file where the object"
                 + "is saved");

@@ -14,6 +14,6 @@ public interface ViewInterface {
     public void display();
     public String getInput();
     public int getOption();
-    public boolean doAction(String value);
+    public void doAction(int option);
     
 }
