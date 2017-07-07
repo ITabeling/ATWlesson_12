@@ -41,7 +41,7 @@ public class FileIO
          /*StartProgramView startProgramView = new StartProgramView();
          startProgramView.display();
          return;*/
-      }  catch (Throwable e){
+      }  catch (Exception e){// changed from Throwable to Exception
           
                System.out.println("Exception:" + e.toString() + 
                                    "\nCause:" + e.getCause() +

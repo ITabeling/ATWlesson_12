@@ -10,14 +10,16 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author IanandJenna
+ * @author Ian Tabeling
  */
-public class ErrorView {
+public class ErrorView 
+{
     
     private static final PrintWriter errorFile = FileIO.getOutFile();
     private static final PrintWriter logFile = FileIO.getLogFile();
 
-    public static void display(String className, String errorMessage) {
+    public static void display(String className, String errorMessage) 
+    {
         
         errorFile.println(
                   "----------------------------------------------"
