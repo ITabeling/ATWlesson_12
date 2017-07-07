@@ -11,9 +11,5 @@ package View;
  */
 public interface ViewInterface {
     
-    public void display();
-    public String getInput();
-    public int getOption();
-    public void doAction(int option);
     
 }

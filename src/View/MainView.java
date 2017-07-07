@@ -6,17 +6,23 @@ package View;
 
 import java.util.Scanner;
 import Model.*;
+import fileio.FileIO;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 
 
-public class MainView extends View
+public class MainView 
 {
     private String menu;
     //Assignment says to delete Scanner 
-    Scanner keyboard = new Scanner(System.in);
+    //Scanner keyboard = new Scanner(System.in);
     Rectangle myRectangle = null;
     Circle myCircle = null;
     Triangle myTriangle = null;
     
+    //@SuppressWarnings("FieldNameHidesFieldInSuperclass")
+    BufferedReader keyboard = FileIO.getInFile();
+    PrintWriter console = FileIO.getOutFile();
     // The constructor - initializes the menu
     public MainView()
     {
@@ -42,7 +48,7 @@ public class MainView extends View
     // The getOption method
     // Gets the user's input and returns it
     // Will loop until there is a valid choice
-  @Override
+ 
     public int getOption()
     {
         int inputValue = 0;
@@ -50,7 +56,7 @@ public class MainView extends View
         {
             this.console.println("Enter an option (1-7): ");
             // when trying to run program stops here and line 78 of FileIO
-            inputValue = keyboard.nextInt();//Instructions says should be "inputValue = this.keyboard.readLine();
+            inputValue = keyboard.readLine();//Instructions says should be "inputValue = this.keyboard.readLine();
             // changed from (inputValue < 1 || inputValue > 7)
             if(inputValue < 1 || inputValue > 9)
             {
@@ -65,7 +71,6 @@ public class MainView extends View
     // The doAction method
     // executes the code for the selected action
     // ????????????takes int but calls for double???????????
-    @Override
     public void doAction(int option)
     {
         switch(option)
@@ -183,21 +188,13 @@ public class MainView extends View
         }
     }
 
-    @Override
-    public void display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getInput() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     
     private void getExistingObject() {
         this.console.println("\n\nEnter the file pathe for file where the object"
                 + "is saved");
-        
+        // should go away after adding control code from assignment
         String filePath = this.getInput();
     }
 
@@ -205,8 +202,9 @@ public class MainView extends View
         
         this.console.println("\n\nEnter the file path for file where the object"
                                  +"is to be saved");
-        
+        /*why is there a second one of these
         String filePath = this.getInput();
         // Instructions say to implement the Control Layer function (we dont have one)
-    }
+        */    
+}
 }
