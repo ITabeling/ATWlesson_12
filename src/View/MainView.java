@@ -248,7 +248,7 @@ public class MainView
         }
     }*/
      // this block has an issue with MainViewException (wants to create class)
-    // errors on lines 253 and 262
+    // errors on lines 253 and 262 (this code is from page 26)
     public static void getSavedObject(String filepath) {
                     //throws MainViewException
                             MainView object = null;
@@ -261,6 +261,6 @@ public class MainView
         catch(Exception e) {
             //throw new MainViewException(e.getMessage());
         }
-    
+    //FileIO.setCurrentObject(object);
 }
 }
