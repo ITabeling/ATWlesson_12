@@ -10,6 +10,7 @@ import fileio.FileIO;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import java.io.PrintWriter;
 public class MainView 
 {
     private String menu;
+    private String string;
     //Assignment says to delete Scanner 
     //commented out Scanner keyboard per instructions 
     //Scanner keyboard = new Scanner(System.in);
@@ -54,14 +56,15 @@ public class MainView
     // Gets the user's input and returns it
     // Will loop until there is a valid choice
  
-    public int getOption()
+    public int getOption() throws IOException
     {
         int inputValue = 0;
         do
-        {
-            this.console.println("Enter an option (1-7): ");
+        {   // I honnestly have no idea what to do with lines 66-67??
+            this.console.println("Enter an option (1-9): ");
             // when trying to run program stops here and line 78 of FileIO
-            inputValue = keyboard.readline();//Instructions says should be "inputValue = this.keyboard.readLine();
+            inputValue = Integer.parseInt(string);//Instructions says should be "inputValue = this.keyboard.readLine();
+           string = keyboard.readLine();
             // changed from (inputValue < 1 || inputValue > 7)
             if(inputValue < 1 || inputValue > 9)
             {
@@ -263,4 +266,8 @@ public class MainView
         }
     //FileIO.setCurrentObject(object);
 }
+
+    private String getInput() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

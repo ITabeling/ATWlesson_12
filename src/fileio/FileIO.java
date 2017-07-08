@@ -24,7 +24,7 @@ public class FileIO
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
       try{
           //open character stream files for end user input and output
