@@ -9,6 +9,7 @@ import fileio.FileIO;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 
@@ -25,8 +26,11 @@ public class MainView
     Triangle myTriangle = null;
     
     
-    BufferedReader keyboard = FileIO.getInFile();
-    PrintWriter console = FileIO.getOutFile();
+    private static BufferedReader keyboard = FileIO.getInFile();
+    private static PrintWriter console = FileIO.getOutFile();
+    private static PrintWriter logFile = null;
+
+            
     // The constructor - initializes the menu
     public MainView()
     {
@@ -39,7 +43,8 @@ public class MainView
              + "\n 6 - Display the Triangle Object"
              + "\n 7 - Quit"
              + "\n 8 - Get saved Object"
-             + "\n 9 - Save Object";
+             + "\n 9 - Save Object"
+             + "\n 10 - Rectangle Report";
     }
     
     // The displayMenu method
@@ -58,20 +63,20 @@ public class MainView
         int inputValue = 0;
         do
         {   // I honnestly have no idea what to do with lines 66-67??
-            this.console.println("Enter an option (1-9): ");
+            console.println("Enter an option (1-10): ");
             // when trying to run program stops here and line 78 of FileIO
             string = keyboard.readLine();
             inputValue = (int) Double.parseDouble(string);//Instructions says should be "inputValue = this.keyboard.readLine();
             
            
             // changed from (inputValue < 1 || inputValue > 7)
-            if(inputValue < 1 || inputValue > 9)
+            if(inputValue < 1 || inputValue > 10)
             {
                 ErrorView.display(this.getClass().getName(),
                                     "Invalid selection.");
             }
       // changed from (inputValue < 1 || inputValue > 7)  
-        } while(inputValue < 1 || inputValue > 9);
+        } while(inputValue < 1 || inputValue > 10);
         return inputValue;
     }
     
@@ -171,7 +176,7 @@ public class MainView
                 else
                 {
                     ErrorView.display(this.getClass().getName(),
-                            "No cicle has been created yet.");
+                            "No circle has been created yet.");
                 }
                 break; 
             case 6:
@@ -199,6 +204,10 @@ public class MainView
             case 9 : // save the current object
                 this.saveObject();
                 break;
+            
+            case 10 : // print the Rectangle Report
+                this.rptRectangle();
+                break;
         }
     }
 
@@ -225,8 +234,7 @@ public class MainView
         menu.displayMenu();
     }
 
-    private void saveObject() {
-        
+    private void saveObject() {        
         console.println("\n\nEnter the file path for file where the object"
                                  +"is to be saved");
         String filePath = this.getInput();    
@@ -270,11 +278,80 @@ public class MainView
         }
         catch(Exception e) {
             //throw new MainViewException(e.getMessage());
+            
         }
     //FileIO.setCurrentObject(object);
 }
 
     private String getInput() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Invalid input");
+        return null;
     } 
+
+    private void rptRectangle() {
+        System.out.println("Rectangle Report not available");
+    }
+
+    public MainView (String[] args) {
+        try {
+            // open character streams for input and output
+            FileIO.inFile = new BufferedReader(new InputStreamReader(System.in));
+            FileIO.outFile = new PrintWriter(System.out, true);
+            
+            // request log file path from user
+            console.println("\n\nEnter the file path for file where the report"
+                                 +"is to be saved");
+            String rectLog = this.getInput();
+            
+            //open log file for Rectangle
+            String filePath = rectLog;
+            FileIO.logFile = new PrintWriter (filePath);
+            
+        } catch (Exception e) {
+            System.out.println("Exception:  " + e.toString() +
+                               "\nCause:  " + e.getCause() +
+                               "\nMessage:  " + e.getMessage());
+            e.printStackTrace();
+    }
+        finally {
+            try {
+                if (FileIO.inFile != null)
+                    FileIO.inFile.close();
+                if (FileIO.outFile != null)
+                    FileIO.outFile.close();
+                if (FileIO.logFile != null)
+                    FileIO.logFile.close();
+            }catch (IOException ex) {
+                ErrorView.display(this.getClass().getName(),"Error closing files." + ex.getMessage());
+                return;
+            }
+        }
+    }
+    
+    /**
+     *
+     * @param dimensions
+     * @param outputLocation
+     */
+    public void printRectangleReport(Rectangle dimensions,String outputLocation){
+        
+        // create BufferReader object for inout file
+        try (PrintWriter out = new PrintWriter(logFile)) {
+            
+            // print title and column headings
+            out.println("\n\n           My Rectangle Report          ");
+            out.printf("%n%-20s%10s%10s", "Width", "Length", "Area");
+            out.printf("%n%-20s%10s%10s", "-----", "------", "----");
+            
+            // print the dimensions of the rectangle
+            for (Rectangle : dimensions) {
+                out.printf("%n%-20s%10s%10s", myRectangle.getWidth(),
+                                              myRectangle.getLength(), 
+                                              myRectangle.getArea());
+            }
+            console.printf("\nCongratulations on a successful print!");
+        
+    }
+    
+    }
 }

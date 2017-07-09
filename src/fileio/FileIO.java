@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 
 public class FileIO
 {
-    private static PrintWriter outFile = null;
-    private static BufferedReader inFile = null;
+    public static PrintWriter outFile = null;
+    public static BufferedReader inFile = null;
     
-    private static PrintWriter logFile = null;
+    public static PrintWriter logFile = null;
 
     /**
      * @param args the command line arguments
