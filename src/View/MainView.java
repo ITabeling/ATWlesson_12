@@ -4,15 +4,12 @@
 
 package View;
 
-import java.util.Scanner;
 import Model.*;
 import fileio.FileIO;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 
 
@@ -63,8 +60,10 @@ public class MainView
         {   // I honnestly have no idea what to do with lines 66-67??
             this.console.println("Enter an option (1-9): ");
             // when trying to run program stops here and line 78 of FileIO
-            inputValue = Integer.parseInt(string);//Instructions says should be "inputValue = this.keyboard.readLine();
-           string = keyboard.readLine();
+            string = keyboard.readLine();
+            inputValue = (int) Double.parseDouble(string);//Instructions says should be "inputValue = this.keyboard.readLine();
+            
+           
             // changed from (inputValue < 1 || inputValue > 7)
             if(inputValue < 1 || inputValue > 9)
             {
@@ -79,7 +78,7 @@ public class MainView
     // The doAction method
     // executes the code for the selected action
     // ????????????takes int but calls for double???????????
-    public void doAction(int option)
+    public void doAction(int option) throws IOException
     {
         switch(option)
         {
@@ -88,12 +87,14 @@ public class MainView
             // create a Rectangle object if one has not been created
                 if(myRectangle == null)
                 {
-                    this.console.println("Creating a Rectangle object.");
-                    this.console.println("Please input the width of your rectangle: ");
-                    double wide = keyboard.nextDouble();
-                    this.console.println("Please enter the length of your rectangle: ");
-                    double len = keyboard.nextDouble();
-                    
+                    console.println("Creating a Rectangle object.");
+                    console.println("Please input the width of your rectangle: ");
+                    String width = keyboard.readLine();
+                    double wide = Double.parseDouble(width);
+                    console.println("Please enter the length of your rectangle: ");
+                    String length = keyboard.readLine();
+                    double len = Double.parseDouble(length);
+                  
                     myRectangle = new Rectangle( );
                     myRectangle.setWidth(wide);
                     myRectangle.setLength(len);//??len or length????
@@ -108,12 +109,13 @@ public class MainView
              // create a Circle object if one has not been created
                 if(myCircle == null)
                 {
-                    this.console.println("Creating a Circle object.");
-                    this.console.println("Please input the radius of your circle: ");
-                    double wide = keyboard.nextDouble();
+                    console.println("Creating a Circle object.");
+                    console.println("Please input the radius of your circle: ");
+                    String radius = keyboard.readLine();
+                    double rad = Double.parseDouble(radius);
                     
                     myCircle = new Circle( );
-                    myCircle.setRadius(wide);
+                    myCircle.setRadius(rad);
                 }
                 else
                 {
@@ -125,11 +127,15 @@ public class MainView
                 // create a Triangle object if one has not been created
                 if(myTriangle == null)
                 {
-                    this.console.println("Creating a Triangle object.");
-                    this.console.println("Please input the base of your triangle: ");
-                    double base = keyboard.nextDouble();
-                    this.console.println("Please enter the height of your triangle: ");
-                    double height = keyboard.nextDouble();
+                    console.println("Creating a Triangle object.");
+                    console.println("Please input the base of your triangle: ");
+                    String bas = keyboard.readLine();
+                    double base = Double.parseDouble(bas);
+                //    double base = keyboard.nextDouble();
+                    console.println("Please enter the height of your triangle: ");
+                    String ht = keyboard.readLine();
+                    double height = Double.parseDouble(ht);
+                //    double height = keyboard.nextDouble();
                     
                     myTriangle= new Triangle( );
                     myTriangle.setBase(base);
@@ -144,10 +150,10 @@ public class MainView
             case 4:
                 if(myRectangle != null)
                 {
-                    this.console.println("Here is your rectangle. ");
-                    this.console.println("It is " + myRectangle.getWidth() + " units wide.");
-                    this.console.println("It is " + myRectangle.getLength() + " units long.");
-                    this.console.println("The rectangle has an area of " + myRectangle.getArea() + " square units"); 
+                    console.println("Here is your rectangle. ");
+                    console.println("It is " + myRectangle.getWidth() + " units wide.");
+                    console.println("It is " + myRectangle.getLength() + " units long.");
+                    console.println("The rectangle has an area of " + myRectangle.getArea() + " square units"); 
                 }
                 else
                 {
@@ -158,9 +164,9 @@ public class MainView
             case 5:
                 if(myCircle != null)
                 {
-                    this.console.println("Here is your circle. ");
-                    this.console.println("Its radius is " + myCircle.getRadius() + " units.");
-                    this.console.println("The circle has an area of " + myCircle.getArea() + " square units"); 
+                    console.println("Here is your circle. ");
+                    console.println("Its radius is " + myCircle.getRadius() + " units.");
+                    console.println("The circle has an area of " + myCircle.getArea() + " square units"); 
                 }
                 else
                 {
@@ -171,10 +177,10 @@ public class MainView
             case 6:
                 if(myTriangle != null)
                 {
-                    this.console.println("Here is your triangle. ");
-                    this.console.println("It is " + myTriangle.getBase() + " units wide.");
-                    this.console.println("It is " + myTriangle.getHeight() + " units high.");
-                    this.console.println("The triangle has an area of " + myTriangle.getArea() + " square units"); 
+                    console.println("Here is your triangle. ");
+                    console.println("It is " + myTriangle.getBase() + " units wide.");
+                    console.println("It is " + myTriangle.getHeight() + " units high.");
+                    console.println("The triangle has an area of " + myTriangle.getArea() + " square units"); 
                 }
                 else
                 {
@@ -200,7 +206,7 @@ public class MainView
 
     // this code is pulled from page 25 (startSavedGame())
     private void getExistingObject() {
-        this.console.println("\n\nEnter the file pathe for file where the object"
+        console.println("\n\nEnter the file path for file where the object"
                 + "is saved");
         // should go away after adding control code from assignment
         //commented out (I think this is in wrong location??)
@@ -221,12 +227,13 @@ public class MainView
 
     private void saveObject() {
         
-        this.console.println("\n\nEnter the file path for file where the object"
+        console.println("\n\nEnter the file path for file where the object"
                                  +"is to be saved");
-        String filePath = this.getInput();
+        String filePath = this.getInput();    
         
         try {
-            MainView.saveObject(FileIO.getExisitingObject(), filePath);
+        // save the object to the specified file
+        MainView.saveObject(FileIO.getExistingObject(), filePath);
         } catch (Exception ex) {
             ErrorView.display("MainView", ex.getMessage());
             
@@ -256,7 +263,7 @@ public class MainView
                     //throws MainViewException
                             MainView object = null;
         
-        try( FileInputStream fips = new FileInputStream(filepath)) {
+        try(FileInputStream fips = new FileInputStream(filepath)) {
             ObjectInputStream input = new ObjectInputStream(fips);
             
             object = (MainView) input.readObject();
@@ -269,5 +276,5 @@ public class MainView
 
     private String getInput() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    } 
 }
